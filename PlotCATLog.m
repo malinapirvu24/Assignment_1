@@ -19,7 +19,7 @@ ylabel('Linear Magnitude');
 
 %% Reference signal after padding
 
-start_index = 140;
+start_index = 157;
 stop_index = 197;
 
 window = zeros(size(data)); 
@@ -85,6 +85,8 @@ t_ns = linspace(cnfg.ScnStrt_ps,cnfg.ScnStp_ps,NSamp)/1000;
 dt = (t_ns(end)-t_ns(1))/(NSamp-1);
 fs = 1/dt;
 
+noise = data(1:135);
+
 figure;
 plot(t_ns,data);
 grid on;
@@ -130,6 +132,36 @@ grid on;
     title("Second scenario of multipath propagation");
 xlabel('Time (ns)');
 ylabel('Linear Magnitude');
+
+
+%% Multipath scenario 3
+
+[cnfg,scn] = my_read_cat_log("2.32_multipath_scenario_2_with ipads023.csv");
+data = readmatrix("2.32_NLOS_multipath.csv");
+
+NSamp = scn(1,1).NumSmpls;
+data = data(1:NSamp);
+
+t_ns = linspace(cnfg.ScnStrt_ps,cnfg.ScnStp_ps,NSamp)/1000;
+dt = (t_ns(end)-t_ns(1))/(NSamp-1);
+fs = 1/dt;
+
+figure;
+plot(t_ns,data);
+grid on;
+    title("Third scenario of multipath propagation");
+xlabel('Time (ns)');
+ylabel('Linear Magnitude');
+
+
+
+
+
+
+
+
+
+
 
 
 
